@@ -1,17 +1,13 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Nuxt SSR</a>
+  <nav class="navbar navbar-light bg-light p-3">
+    <div
+      class="container-fluid d-flex justify-content-between align-items-center w-100"
+    >
+      <NuxtLink class="navbar-brand" to="/">Nuxt SSR</NuxtLink>
 
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-        </ul>
+      <div class="d-flex gap-3">
+        <NuxtLink class="nav-link" to="/">Home</NuxtLink>
+        <NuxtLink class="nav-link" to="/about">About</NuxtLink>
       </div>
     </div>
   </nav>
