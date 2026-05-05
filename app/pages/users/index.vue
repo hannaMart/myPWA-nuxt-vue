@@ -20,26 +20,58 @@ const addUser = async () => {
 
   await refresh();
 };
+const deleteUser = async (id) => {
+  await $fetch(`/api/users/${id}`, {
+    method: "DELETE",
+  });
+
+  await refresh();
+};
 </script>
 
 <template>
-  <section>
-    <h1>Users Page</h1>
+  <section class="container py-4">
+    <h1 class="mb-4">Users</h1>
 
-    <form @submit.prevent="addUser">
-      <input v-model="name" placeholder="Name" />
-      <input v-model="email" placeholder="Email" />
-      <button type="submit">Add user</button>
+    <form class="row g-2 mb-4" @submit.prevent="addUser">
+      <div class="col-md-5">
+        <input v-model="name" class="form-control" placeholder="Name" />
+      </div>
+
+      <div class="col-md-5">
+        <input v-model="email" class="form-control" placeholder="Email" />
+      </div>
+
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100" type="submit">Add</button>
+      </div>
     </form>
 
     <p v-if="pending">Loading...</p>
-    <p v-else-if="error">Error loading users</p>
+    <p v-else-if="error" class="text-danger">Error loading users</p>
 
-    <ul v-else>
-      <li v-for="user in users" :key="user.id">
-        <NuxtLink :to="`/users/${user.id}`">
-          {{ user.name }} — {{ user.email }}
-        </NuxtLink>
+    <ul v-else class="list-group">
+      <li
+        v-for="user in users"
+        :key="user.id"
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <div>
+          <NuxtLink
+            :to="`/users/${user.id}`"
+            class="fw-bold text-decoration-none"
+          >
+            {{ user.name }}
+          </NuxtLink>
+          <div class="text-muted small">{{ user.email }}</div>
+        </div>
+
+        <button
+          class="btn btn-outline-danger btn-sm"
+          @click="deleteUser(user.id)"
+        >
+          Delete
+        </button>
       </li>
     </ul>
   </section>
